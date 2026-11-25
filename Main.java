@@ -11,9 +11,10 @@ String name = scanner.nextLine();
     boolean running = true;
 
     while (running) {
-        System.out.println("\n=== Simple Bank Account (v1.0) ===");
+        System.out.println("\n=== Simple Bank Account (History Module) ===");
         System.out.println("1. Deposit");
         System.out.println("2. Check Balance");
+        System.out.println("3. View Transaction History");
         System.out.println("0. Exit");
         System.out.print("Choose an option: ");
 
@@ -28,6 +29,9 @@ String name = scanner.nextLine();
             case 2:
                 System.out.printf(Locale.US, "Account: %s | Current Balance: %.2f SAR%n",
                         account.getAccountHolder(), account.getBalance());
+                break;
+            case 3:
+                account.printTransactionHistory();
                 break;
             case 0:
                 running = false;

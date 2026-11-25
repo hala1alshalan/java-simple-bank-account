@@ -1,18 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class BankAccount {
 private String accountHolder;
 private double balance;
+private List<String> transactionHistory;
 
 public BankAccount(String accountHolder, double initialBalance) {
     this.accountHolder = accountHolder;
     this.balance = Math.max(0, initialBalance);
+    this.transactionHistory = new ArrayList<>();
+    this.transactionHistory.add(String.format(Locale.US, "Account opened with balance: %.2f SAR", this.balance));
 }
 
 public void deposit(double amount) {
     if (amount > 0) {
         balance += amount;
-        System.out.printf("Deposited: %.2f SAR | New Balance: %.2f SAR%n", amount, balance);
+        String record = String.format(Locale.US, "Deposit: +%.2f SAR | Balance: %.2f SAR", amount, balance);
+        transactionHistory.add(record);
+        System.out.printf(Locale.US, "Deposited: %.2f SAR | New Balance: %.2f SAR%n", amount, balance);
     } else {
         System.out.println("Error: Deposit amount must be positive.");
+    }
+}
+
+public void printTransactionHistory() {
+    System.out.println("\n— Transaction History —");
+    for (String record : transactionHistory) {
+        System.out.println("- " + record);
     }
 }
 
