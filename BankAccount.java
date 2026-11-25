@@ -25,8 +25,21 @@ public void deposit(double amount) {
     }
 }
 
+public void withdraw(double amount) {
+    if (amount <= 0) {
+        System.out.println("Error: Withdrawal amount must be positive.");
+    } else if (amount > balance) {
+        System.out.printf(Locale.US, "Error: Insufficient funds. Current Balance: %.2f SAR%n", balance);
+    } else {
+        balance -= amount;
+        String record = String.format(Locale.US, "Withdraw: -%.2f SAR | Balance: %.2f SAR", amount, balance);
+        transactionHistory.add(record);
+        System.out.printf(Locale.US, "Withdrew: %.2f SAR | New Balance: %.2f SAR%n", amount, balance);
+    }
+}
+
 public void printTransactionHistory() {
-    System.out.println("\n— Transaction History —");
+    System.out.println("\n--- Transaction History ---");
     for (String record : transactionHistory) {
         System.out.println("- " + record);
     }
